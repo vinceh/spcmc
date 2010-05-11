@@ -1,0 +1,110 @@
+h1 {
+	border-bottom: 1px solid #e3e3e3;
+	padding-bottom: 5px;
+}
+
+/**
+ * Flash and error messages
+ */
+div.flash_close_button {
+	float: right;
+}
+
+div.flash_close_button a {
+	text-decoration: none!important;
+	font-weight: bold;
+}
+
+.flash_info, .flash_success, .flash_error, #errorExplanation {
+	padding: 10px;
+	padding-left: 35px;
+	border: 1px dotted;
+	background: no-repeat 10px center;
+}
+
+.flash_info {
+	color: #004EAE;
+	border-color: #004EAE;
+	background-image: url('../images/info.png');
+	background-color: #ddddff;
+}
+
+.flash_success {
+	color: #00AF00;
+	border-color: #00AF01;
+	background-image: url('../images/success.png');
+	background-color: #ddffdd;
+}
+
+.flash_error, #errorExplanation {
+	color: #FF0000;
+	border-color: #FF0000;
+	background-image: url('../images/error.png');
+	background-color: #ffdddd;
+}
+
+
+.fieldWithErrors {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #ffdddd;
+	color: red;
+}
+
+#errorExplanation {
+	margin-bottom: 20px;
+}
+
+#errorExplanation h2 {
+	text-align: left;
+	font-weight: bold;
+	padding: 6px;
+	font-size: 12px;
+	margin: -7px;
+	color: #000;
+}
+
+#errorExplanation p {
+	color: #333;
+	margin-bottom: 0;
+}
+
+#errorExplanation ul, form #errorExplanation ul {
+	margin: auto;
+	margin-left: 20px;
+	padding: auto;
+}
+
+#errorExplanation ul li, form #errorExplanation ul li {
+	font-size: 12px;
+	list-style: square;
+	margin-left: 10px;
+}
+.mandatory {
+	color: red;
+}
+
+/**
+ * TinyMCE fix
+ */
+.mceToolbar {
+	margin: 0 !important;
+	padding: 5px !important;
+}
+
+.mceSplitButton, .mceListBox {
+	margin: 0 !important;
+	padding: 0 !important;
+	width: auto !important;
+}
+
+.mceEditor tbody tr td {
+	padding: 0;
+	margin: 0;
+	width: auto !important;
+}
+
+.mceEditor tbody tr td .mceButton {
+	width: 20px !important;
+	padding: 0;
+}

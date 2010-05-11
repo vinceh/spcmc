@@ -1,0 +1,63 @@
+<%
+# Partial for the part of the form that contains volunteer information
+# Parameters: form (the form object), skip_password (true if the password field should not be added)
+	
+skip_password = nil if local_assigns[:skip_password].nil?
+%>
+<% form_for @account, :url => { :action => form_action } do |f| %>
+	<%= f.error_messages %>
+	<fieldset>
+		<legend>Personal information</legend>
+		<ul>
+			<li>
+				<%= f.label :first_name, "First name: <span class=\"mandatory\">*</span>"%>
+				<%= f.text_field :first_name %>
+			</li>
+			<li>
+				<%= f.label :last_name, "Last name: <span class=\"mandatory\">*</span>"%>
+				<%= f.text_field :last_name %>
+			</li>
+			<li>
+				<%= f.label :email, "Email: <span class=\"mandatory\">*</span>"%>
+				<%= f.text_field :email %>
+			</li>
+			<% if !skip_password %>	
+			<li>
+				<%= f.label :password, "Password: <span class=\"mandatory\">*</span>"%>
+				<%= f.password_field :password %>
+			</li>	
+			<li>
+				<%= f.label :password_confirmation, "Confirm password: <span class=\"mandatory\">*</span>"%>
+				<%= f.password_field :password_confirmation %>
+			</li>
+			<% end %>
+			<li>
+				<%= f.label :birthday, "Date of birth: <span class=\"mandatory\">*</span>"%>
+				<%= f.date_select :birthday, :start_year => Time.now.year-80, :end_year => Time.now.year-10 %>
+			</li>
+			<li>
+				<%= f.label :phone_number, "Phone Number:"%>
+				<%= f.text_field :phone_number %>
+			</li>
+			<li>
+				<%= label_tag "", "Gender?", :class => "normal"%><br />
+				
+				<%= f.radio_button :gender, "true"%>
+				<%= label_tag "gender_1", "Male", :class => "normal"%>
+				
+				<%= f.radio_button :gender, "false"%> 
+				<%= label_tag "gender_0", "Female", :class => "normal"%>
+			</li>
+			<li>
+				<%= label_tag "", "Baptized?", :class => "normal"%><br />
+				
+				<%= f.radio_button :gender, "true"%>
+				<%= label_tag "baptized_1", "Yes", :class => "normal"%>
+				
+				<%= f.radio_button :gender, "false"%> 
+				<%= label_tag "baptized_0", "No", :class => "normal"%>
+			</li>
+		</ul>
+	</fieldset>
+    <p><%=f.submit submit%></p>
+<% end %>

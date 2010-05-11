@@ -1,0 +1,17 @@
+<% form_for @newsitem, :url => {:action => form_action } do |f| %>
+	<%= f.error_messages %>
+	<fieldset>
+		<legend>News</legend>
+		<ul>
+			<li>
+				<%= f.label :title, "Title:"%>
+				<%= f.text_field :title %>
+			</li>
+			<li>
+				<%= f.label :body, "Body:"%>
+				<%= f.text_area :body, :class => "mceEditor" %>
+			</li>
+		</ul>
+	</fieldset>
+    <p><%=f.submit submit %></p>
+<% end %>

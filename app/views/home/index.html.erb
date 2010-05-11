@@ -1,0 +1,22 @@
+<% if !user %>
+	<%= link_to "Login", :action => :login %>
+	<%= link_to "Register Account", :controller => :accounts, :action => :new_account %>
+	<% form_tag :action => :email_signup do -%>
+	<p>Sign up for email notifications: 
+	<%= text_field 		:email, :value %> <%= submit_tag "Submit" %>
+<% end -%>
+<% else %>
+	<%= link_to "Logout", :action => :logout %>
+	<%= link_to "Post News", :controller => :newsitems, :action => :new_news %>
+<% end %>
+
+<% @newsitems.each do |n| %>
+	<hr/>
+	<p>
+		<%= n.created_at.strftime("%m/%d/%y") %>
+		<%= link_to 'Edit', :controller => :newsitems, :action => :edit, :id => n.n_id %>
+		<%= link_to 'Delete', { :controller => :newsitems, :action => :delete, :id => n.n_id }, :confirm => 'Are you sure?' %>
+	</p>
+	<p><b><%= n.title %></b></p>
+	<p><%= n.body %></p>
+<% end %>

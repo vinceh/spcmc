@@ -1,0 +1,735 @@
+# Logfile created on Tue May 04 00:26:36 -0700 2010  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (132.0ms)[0m   [0mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (267.0ms)[0m   [0;1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to BatchCreate (20100503231718)
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (99.0ms)[0m   [0;1mCREATE TABLE `accounts` (`a_id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `first_name` varchar(255) NOT NULL, `last_name` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `birthday` date NOT NULL, `gender` varchar(255), `baptized` tinyint(1), `phone_number` varchar(255), `account_type` tinyint(1) DEFAULT 0 NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (126.0ms)[0m   [0;1mCREATE TABLE `calendars` (`c_id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `link` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (134.0ms)[0m   [0;1mCREATE TABLE `news` (`n_id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `title` varchar(255) NOT NULL, `body` text NOT NULL, `created_at` datetime DEFAULT '2010-05-04 00:26:37' NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (141.0ms)[0m   [0;1mCREATE TABLE `emails` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `email` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (30.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100503231718')[0m
+Migrating to BatchCreate2 (20100503233510)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (81.0ms)[0m   [0mCREATE TABLE `posts` (`p_id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `title` varchar(255) NOT NULL, `body` text NOT NULL, `a_id` int(11) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `type` int(11) NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (243.0ms)[0m   [0;1mCREATE INDEX `a_id` ON `posts` (`a_id`)[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (87.0ms)[0m   [0;1mCREATE TABLE `comments` (`c_id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `body` text NOT NULL, `p_id` int(11) NOT NULL, `user` varchar(255) NOT NULL, `created_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (296.0ms)[0m   [0mCREATE INDEX `p_id` ON `comments` (`p_id`)[0m
+  [4;36;1mSQL (30.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100503233510')[0m
+Migrating to ChangeNews (20100504044731)
+  [4;35;1mSQL (37.0ms)[0m   [0mRENAME TABLE `news` TO `newsitems`[0m
+  [4;36;1mSQL (41.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100504044731')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `accounts`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mdescribe `accounts`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `accounts`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `calendars`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mdescribe `calendars`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `calendars`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `comments`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mdescribe `comments`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `comments`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `emails`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mdescribe `emails`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `emails`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mdescribe `newsitems`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW KEYS FROM `newsitems`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `posts`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mdescribe `posts`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `posts`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-04 00:27:02) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 2625ms (View: 2623, DB: 0) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-04 00:27:11) [GET]
+  [4;36;1mNewsitem Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+Completed in 26ms (View: 17, DB: 3) | 200 OK [http://localhost/newsitems/new_news]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-04 00:27:13) [POST]
+  Parameters: {"authenticity_token"=>"Uj+UQ7UmhSMBxPh5G8ezXG/FOhwTBnrDYeWMJCyK6mw="}
+Rendering template within layouts/application
+Rendering home/index
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-04 00:32:17) [POST]
+  Parameters: {"authenticity_token"=>"Uj+UQ7UmhSMBxPh5G8ezXG/FOhwTBnrDYeWMJCyK6mw="}
+Rendering template within layouts/application
+Rendering home/index
+Completed in 50ms (View: 48, DB: 0) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-04 00:32:19) [GET]
+  [4;36;1mNewsitem Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+Completed in 57ms (View: 49, DB: 4) | 200 OK [http://localhost/newsitems/new_news]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-04 00:32:38) [POST]
+  Parameters: {"commit"=>"Submit", "authenticity_token"=>"Uj+UQ7UmhSMBxPh5G8ezXG/FOhwTBnrDYeWMJCyK6mw=", "newsitem"=>{"body"=>"<p>hello</p>\r\n<ul>\r\n<li>these</li>\r\n<li>are</li>\r\n<li>bullets</li>\r\n</ul>", "title"=>""}}
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+Completed in 318ms (View: 41, DB: 2) | 200 OK [http://localhost/newsitems/new_news]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-04 00:32:48) [POST]
+  Parameters: {"commit"=>"Submit", "authenticity_token"=>"Uj+UQ7UmhSMBxPh5G8ezXG/FOhwTBnrDYeWMJCyK6mw=", "newsitem"=>{"body"=>"<p>hello</p>\r\n<ul>\r\n<li>these</li>\r\n<li>are</li>\r\n<li>bullets</li>\r\n</ul>", "title"=>"test"}}
+  [4;36;1mNewsitem Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mNewsitem Create (1.0ms)[0m   [0;1mINSERT INTO `newsitems` (`created_at`, `title`, `body`) VALUES('2010-05-04 07:32:48', 'test', '<p>hello</p>\r\n<ul>\r\n<li>these</li>\r\n<li>are</li>\r\n<li>bullets</li>\r\n</ul>')[0m
+  [4;35;1mSQL (73.0ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/home
+Completed in 455ms (DB: 77) | 302 Found [http://localhost/newsitems/new_news]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-04 00:32:49) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-04 00:37:37) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 21ms (View: 12, DB: 2) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 15:06:49) [GET]
+  [4;36;1mNewsitem Load (32.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 2603ms (View: 2562, DB: 34) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 15:08:23) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 19ms (View: 10, DB: 5) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 15:08:37) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 20ms (View: 11, DB: 2) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:03:25) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 29ms (View: 17, DB: 4) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:03:40) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 15ms (View: 6, DB: 3) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:03:49) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 63ms (View: 53, DB: 4) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:04:05) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 21ms (View: 11, DB: 4) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:04:22) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 21ms (View: 13, DB: 3) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:06:05) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 20ms (View: 10, DB: 3) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:06:13) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 20ms (View: 12, DB: 3) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:06:25) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 19ms (View: 10, DB: 4) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:30:07) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 27ms (View: 15, DB: 6) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:30:38) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 18ms (View: 7, DB: 4) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:30:51) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 23ms (View: 15, DB: 3) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#delete (for 127.0.0.1 at 2010-05-05 16:30:55) [GET]
+  Parameters: {"confirm"=>"Are you sure?", "id"=>"1"}
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` WHERE (`newsitems`.`n_id` = '1') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mNewsitem Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+  [4;35;1mNewsitem Destroy (2.0ms)[0m   [0mDELETE FROM `newsitems` WHERE `n_id` = 1[0m
+  [4;36;1mSQL (35.0ms)[0m   [0;1mCOMMIT[0m
+
+ActionView::MissingTemplate (Missing template newsitems/delete.erb in view path app/views):
+  
+
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:31:22) [GET]
+  [4;35;1mNewsitem Load (1.0ms)[0m   [0mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+Completed in 17ms (View: 10, DB: 2) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:31:24) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#login (for 127.0.0.1 at 2010-05-05 16:31:27) [GET]
+Rendering template within layouts/application
+Rendering home/login
+Completed in 12ms (View: 10, DB: 0) | 200 OK [http://localhost/home/login]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:31:48) [GET]
+  [4;36;1mNewsitem Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+Completed in 25ms (View: 16, DB: 3) | 200 OK [http://localhost/newsitems/new_news]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:31:51) [POST]
+  Parameters: {"commit"=>"Submit", "authenticity_token"=>"2GSDI7WV/LEUUZ/uZlbcRm9KMe/M6S88WWRa1WL//FI=", "newsitem"=>{"body"=>"fdsda", "title"=>"fdsafsda"}}
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mNewsitem Create (1.0ms)[0m   [0mINSERT INTO `newsitems` (`created_at`, `title`, `body`) VALUES('2010-05-05 23:31:51', 'fdsafsda', 'fdsda')[0m
+  [4;36;1mSQL (61.0ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/home
+Completed in 85ms (DB: 67) | 302 Found [http://localhost/newsitems/new_news]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:31:52) [GET]
+  [4;35;1mNewsitem Load (2.0ms)[0m   [0mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;36;1mNewsitem Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Completed in 70ms (View: 9, DB: 4) | 200 OK [http://localhost/home]
+  [4;35;1mSQL (2.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:31:53) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (1.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#delete (for 127.0.0.1 at 2010-05-05 16:31:54) [GET]
+  Parameters: {"confirm"=>"Are you sure?", "id"=>"2"}
+  [4;35;1mNewsitem Load (0.0ms)[0m   [0mSELECT * FROM `newsitems` WHERE (`newsitems`.`n_id` = '2') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+  [4;36;1mNewsitem Destroy (0.0ms)[0m   [0;1mDELETE FROM `newsitems` WHERE `n_id` = 2[0m
+  [4;35;1mSQL (62.0ms)[0m   [0mCOMMIT[0m
+
+ActionView::MissingTemplate (Missing template newsitems/delete.erb in view path app/views):
+  
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:31:57) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+Completed in 14ms (View: 5, DB: 1) | 200 OK [http://localhost/home]
+  [4;35;1mSQL (1.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:31:59) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:32:56) [GET]
+  [4;35;1mNewsitem Load (1.0ms)[0m   [0mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+Completed in 21ms (View: 11, DB: 1) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:33:09) [GET]
+  [4;36;1mNewsitem Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+Completed in 17ms (View: 8, DB: 2) | 200 OK [http://localhost/newsitems/new_news]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:33:16) [POST]
+  Parameters: {"commit"=>"Submit", "authenticity_token"=>"2GSDI7WV/LEUUZ/uZlbcRm9KMe/M6S88WWRa1WL//FI=", "newsitem"=>{"body"=>"<p>asfdsafsad</p>", "title"=>"fsdaf"}}
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mNewsitem Create (1.0ms)[0m   [0mINSERT INTO `newsitems` (`created_at`, `title`, `body`) VALUES('2010-05-05 23:33:16', 'fsdaf', '<p>asfdsafsad</p>')[0m
+  [4;36;1mSQL (72.0ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/home
+Completed in 86ms (DB: 75) | 302 Found [http://localhost/newsitems/new_news]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:33:17) [GET]
+  [4;35;1mNewsitem Load (1.0ms)[0m   [0mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;36;1mNewsitem Columns (5.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Completed in 23ms (View: 11, DB: 7) | 200 OK [http://localhost/home]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:33:18) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:33:41) [GET]
+  [4;35;1mNewsitem Load (1.0ms)[0m   [0mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;36;1mNewsitem Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Completed in 25ms (View: 12, DB: 5) | 200 OK [http://localhost/home]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#delete (for 127.0.0.1 at 2010-05-05 16:33:46) [GET]
+  Parameters: {"id"=>"3"}
+  [4;35;1mNewsitem Load (0.0ms)[0m   [0mSELECT * FROM `newsitems` WHERE (`newsitems`.`n_id` = '3') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+  [4;36;1mNewsitem Destroy (0.0ms)[0m   [0;1mDELETE FROM `newsitems` WHERE `n_id` = 3[0m
+  [4;35;1mSQL (45.0ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/home
+Completed in 60ms (DB: 48) | 302 Found [http://localhost/newsitems/delete/3]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:33:47) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+Completed in 11ms (View: 5, DB: 2) | 200 OK [http://localhost/home]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:33:47) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (1.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:34:41) [GET]
+  [4;35;1mNewsitem Load (1.0ms)[0m   [0mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+Completed in 17ms (View: 6, DB: 2) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:34:47) [GET]
+  [4;36;1mNewsitem Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+Completed in 22ms (View: 11, DB: 3) | 200 OK [http://localhost/newsitems/new_news]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:34:51) [POST]
+  Parameters: {"commit"=>"Submit", "authenticity_token"=>"2GSDI7WV/LEUUZ/uZlbcRm9KMe/M6S88WWRa1WL//FI=", "newsitem"=>{"body"=>"<p>fsdfsdfdsfs</p>", "title"=>"fds"}}
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mNewsitem Create (1.0ms)[0m   [0mINSERT INTO `newsitems` (`created_at`, `title`, `body`) VALUES('2010-05-05 23:34:51', 'fds', '<p>fsdfsdfdsfs</p>')[0m
+  [4;36;1mSQL (69.0ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/home
+Completed in 89ms (DB: 73) | 302 Found [http://localhost/newsitems/new_news]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:34:52) [GET]
+  [4;35;1mNewsitem Load (1.0ms)[0m   [0mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;36;1mNewsitem Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Completed in 16ms (View: 7, DB: 3) | 200 OK [http://localhost/home]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:34:53) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:34:56) [GET]
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+Completed in 18ms (View: 9, DB: 3) | 200 OK [http://localhost/newsitems/new_news]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:35:01) [POST]
+  Parameters: {"commit"=>"Submit", "authenticity_token"=>"2GSDI7WV/LEUUZ/uZlbcRm9KMe/M6S88WWRa1WL//FI=", "newsitem"=>{"body"=>"<p>test1</p>", "title"=>"test"}}
+  [4;36;1mNewsitem Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mNewsitem Create (0.0ms)[0m   [0;1mINSERT INTO `newsitems` (`created_at`, `title`, `body`) VALUES('2010-05-05 23:35:01', 'test', '<p>test1</p>')[0m
+  [4;35;1mSQL (61.0ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/home
+Completed in 81ms (DB: 66) | 302 Found [http://localhost/newsitems/new_news]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:35:01) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 25ms (View: 12, DB: 6) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:35:03) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:37:32) [GET]
+  [4;36;1mNewsitem Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+
+ActionView::TemplateError (Missing template newsitems/_form_account.erb in view path app/views) on line #1 of app/views/newsitems/new_news.html.erb:
+1: <%=render :partial => 'form_account', :locals => {:form_action => 'new_news', :submit => 'Submit'}%>
+2: <%= button_to "Back", :controller => :home, :action => :index %>
+
+    app/views/newsitems/new_news.html.erb:1
+
+Rendered rescues/_trace (119.0ms)
+Rendered rescues/_request_and_response (2.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:37:47) [GET]
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Rendering template within layouts/application
+Rendering newsitems/new_news
+Rendered newsitems/_newsitem_form (6.0ms)
+Completed in 62ms (View: 27, DB: 3) | 200 OK [http://localhost/newsitems/new_news]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#new_news (for 127.0.0.1 at 2010-05-05 16:37:53) [POST]
+  Parameters: {"commit"=>"Submit", "authenticity_token"=>"2GSDI7WV/LEUUZ/uZlbcRm9KMe/M6S88WWRa1WL//FI=", "newsitem"=>{"body"=>"<p>fdsafsad</p>", "title"=>"fdsa"}}
+  [4;36;1mNewsitem Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mNewsitem Create (0.0ms)[0m   [0;1mINSERT INTO `newsitems` (`created_at`, `title`, `body`) VALUES('2010-05-05 23:37:53', 'fdsa', '<p>fdsafsad</p>')[0m
+  [4;35;1mSQL (95.0ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/home
+Completed in 113ms (DB: 98) | 302 Found [http://localhost/newsitems/new_news]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:37:53) [GET]
+  [4;36;1mNewsitem Load (0.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 22ms (View: 9, DB: 3) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:37:55) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:43:57) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 25ms (View: 11, DB: 5) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#edit (for 127.0.0.1 at 2010-05-05 16:44:00) [GET]
+  Parameters: {"id"=>"4"}
+Rendering template within layouts/application
+Rendering newsitems/edit
+
+ActionView::TemplateError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id) on line #1 of app/views/newsitems/_newsitem_form.html.erb:
+1: <% form_for @newsitem, :url => {:action => form_action } do |f| %>
+2: 	<%= f.error_messages %>
+3: 	<fieldset>
+4: 		<legend>News</legend>
+
+    app/views/newsitems/_newsitem_form.html.erb:1
+    app/views/newsitems/edit.html.erb:1
+
+Rendered rescues/_trace (95.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:45:31) [GET]
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mNewsitem Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Completed in 24ms (View: 11, DB: 6) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#edit (for 127.0.0.1 at 2010-05-05 16:45:34) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` WHERE (`newsitems`.`n_id` = '4') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering newsitems/edit
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Rendered newsitems/_newsitem_form (8.0ms)
+Completed in 17ms (View: 9, DB: 3) | 200 OK [http://localhost/newsitems/edit/4]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#edit (for 127.0.0.1 at 2010-05-05 16:45:54) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` WHERE (`newsitems`.`n_id` = '4') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering newsitems/edit
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+Rendered newsitems/_newsitem_form (6.0ms)
+Completed in 23ms (View: 11, DB: 4) | 200 OK [http://localhost/newsitems/edit/4]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NewsitemsController#edit (for 127.0.0.1 at 2010-05-05 16:46:04) [PUT]
+  Parameters: {"commit"=>"Submit changes", "authenticity_token"=>"2GSDI7WV/LEUUZ/uZlbcRm9KMe/M6S88WWRa1WL//FI=", "id"=>"4", "newsitem"=>{"body"=>"<p>fsdfsdfdsfs</p>", "title"=>"testttterrr"}}
+  [4;36;1mNewsitem Load (1.0ms)[0m   [0;1mSELECT * FROM `newsitems` WHERE (`newsitems`.`n_id` = '4') LIMIT 1[0m
+  [4;35;1mNewsitem Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `newsitems`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mNewsitem Update (1.0ms)[0m   [0mUPDATE `newsitems` SET `title` = 'testttterrr' WHERE `n_id` = 4[0m
+  [4;36;1mSQL (128.0ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/home
+Completed in 145ms (DB: 132) | 302 Found [http://localhost/newsitems/edit/4]
+  [4;35;1mSQL (1.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-05-05 16:46:06) [GET]
+  [4;35;1mNewsitem Load (0.0ms)[0m   [0mSELECT * FROM `newsitems` [0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;36;1mNewsitem Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `newsitems`[0m
+Completed in 21ms (View: 10, DB: 5) | 200 OK [http://localhost/home]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-05 16:46:07) [GET]
+
+ActionController::RoutingError (No route matches "/images/success.png" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
