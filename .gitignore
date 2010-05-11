@@ -1,2 +1,2 @@
-.log
+*.log
 database.yml
